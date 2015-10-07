@@ -60,3 +60,5 @@ Whenever you fetch from the svn repo, it is advisable that you
 run the command `git svn fetch --fetch=all`  This will get all
 changes along every branch in the SVN repository.  After this,
 you will want to run `git merge name-svn remotes/name`
+
+Source: http://stackoverflow.com/questions/3239759/checkout-remote-branch-using-git-svn
