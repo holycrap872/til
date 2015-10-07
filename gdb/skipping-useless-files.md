@@ -1,4 +1,4 @@
-#Skip File When Stepping Through in GDB
+#Skipping Useless Files While Debugging
 
 It's always pretty annoying when you're stepping (`s`) through a program
 and you keep hitting a file that provides no information.  An example is
