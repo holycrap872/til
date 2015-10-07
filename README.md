@@ -16,6 +16,9 @@ smart people at [GrammaTech](http://grammatech.com).
 - [Skipping Useless Files While Debugging](gdb/skipping-useless-files.md)
 - [View Source Code While Debugging](gdb/source-code-view.md)
 
+### VirtualBox
+- [Set up Shared Folder](virtualbox/set-up-shared-folder.md)
+
 ## About
 
 I shamelessly stole this idea from
