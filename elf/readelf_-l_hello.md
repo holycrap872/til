@@ -1,7 +1,8 @@
-#Readelf -l Breakdown
+# Readelf -l Breakdown
 
 When I ran `readelf -l hello`, I got the following output.  I intersperse
-my comments with references to the [objdump](objdump.md)
+my comments with references to [objdump -D hello](objdump_-D_hello.md)
+and [readelf -h hello](readelf_-h_hello.md)
 
 ```
 Elf file type is EXEC (Executable file)
@@ -15,14 +16,18 @@ Program Headers:
                  0x00000000000001f8 0x00000000000001f8  R E    8
 ```
 
-Observations
-1) Based on the readelf -h, the elf header information is 64 bytes.  Thus the
+#### Observations
+
+1. Based on the readelf -h, the elf header information is 64 bytes.  Thus the
    0x40 start address of PHDR
-2) Based on the readelf -h, there are 9 programs heads, each header taking up
+
+2. Based on the readelf -h, there are 9 programs heads, each header taking up
    56 bytes.  56 * 9 -> 504 -> 0x1f8
-3) Based on opensecuritytraining.info, this section doesn't get mapped into
+
+3. Based on opensecuritytraining.info, this section doesn't get mapped into
    memory, so VirtAddr = PhysAddr since it doesn't matter.
-4) This section is R E.  It won't be mapped into memory, however, so this
+
+4. This section is R E.  It won't be mapped into memory, however, so this
    doesn't really matter.
 
 ```
@@ -31,9 +36,11 @@ Observations
       [Requesting program interpreter: /lib64/ld-linux-x86-64.so.2]
 ```
 
-Observations:
-1) INTERP offset = 64 (elf header) + 504 (program header) = 0x238
-2) Readelf pulls out this string here.  This is the interpreter that is going
+#### Observations:
+
+1. INTERP offset = 64 (elf header) + 504 (program header) = 0x238
+
+2. Readelf pulls out this string here.  This is the interpreter that is going
    to be used toa dynamically link this particular binary.  This will be
    be loaded into memory before the rest of the binary.
 
@@ -44,14 +51,17 @@ Observations:
                  0x0000000000000230 0x0000000000000238  RW     200000
 ```
 
-Observations
-1) These say what values get loaded into memory.  There are two loads, basically
+#### Observations
+
+1. These say what values get loaded into memory.  There are two loads, basically
    throwing certain parts of the program from the ELF file into memory.
-2) These VirtAddr's map exactly onto the addresses you get when running objdump
+
+2. These VirtAddr's map exactly onto the addresses you get when running objdump
    -D.  The first load corresponds with addresses 0x400238 - 0x400700.  The reason 
    I'm guessing that it's not 0x4006fc is there's some padding thrown in there.
    The second load corresponds to 0x600e10 - 0x601038.
-3) It's obviously not magic that the obj-dump maps so closely to these values.
+
+3. It's obviously not magic that the obj-dump maps so closely to these values.
    It's likely that objdump dynamically generates what the virtual file would
    look like upon being loaded into memory.
 
