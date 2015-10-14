@@ -1,6 +1,6 @@
-#ReadElf Breakdown
+#Readelf -l Breakdown
 
-When I ran `readelf -h hello`, I got the following output.  I intersperse
+When I ran `readelf -l hello`, I got the following output.  I intersperse
 my comments with references to the [objdump](objdump.md)
 
 ```
