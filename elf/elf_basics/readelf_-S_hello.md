@@ -98,6 +98,17 @@ constant string.
        0000000000000034  0000000000000000   A       0     0     4
   [17] .eh_frame         PROGBITS         0000000000400608  00000608
        00000000000000f4  0000000000000000   A       0     0     8
+```
+
+##### Observations
+
+1. Here the program splits.  Everything above can be thought of as
+executable code and everything below can be through of as data.  The
+hole in between is basically up for grabs.  It might be used for heap?
+I know it isn't used for stack because stack goes from the end of the
+data section (in this instance, 0x601048 and up).
+
+```
   [18] .init_array       INIT_ARRAY       0000000000600e10  00000e10
        0000000000000008  0000000000000000  WA       0     0     8
   [19] .fini_array       FINI_ARRAY       0000000000600e18  00000e18
