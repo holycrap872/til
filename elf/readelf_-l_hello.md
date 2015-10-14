@@ -65,6 +65,10 @@ Program Headers:
    It's likely that objdump dynamically generates what the virtual file would
    look like upon being loaded into memory.
 
+4. The first LOAD segment is given permissions RE, while the second load segment
+   is given permissions RW,  This shows that these two segments can be thought of
+   as the program and variable parts of the program respectively.
+
 ```
   DYNAMIC        0x0000000000000e28 0x0000000000600e28 0x0000000000600e28
                  0x00000000000001d0 0x00000000000001d0  RW     8
@@ -78,6 +82,20 @@ Program Headers:
                  0x00000000000001f0 0x00000000000001f0  R      1
 
  Section to Segment mapping:
+```
+
+#### Observations
+
+As discussed in the [README](README.md), and ELF file can either be compiled as
+and executable or a library.  Based on this, the program is either viewed as
+a series of segments (executable) or sections (library).  In reality, however,
+these two different views are just different ways of viewing the same pieces of
+code.  For example, as can be seen below, the first LOAD segment (02) is composed
+of a many different sections.  As descibed in the LOAD mapping, these sectons
+will be loaded into addresses 0x400000 - 0x4006fc when the program is mapped
+into memory.
+
+```
   Segment Sections...
    00     
    01     .interp 
