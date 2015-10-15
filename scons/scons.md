@@ -25,6 +25,12 @@ export GTR_BUILD_ARGS"git=true"
 ./build
 ```
 
+another option is simply
+
+```
+./build git=true
+```
+
 To explain this problem a little further, scons was failing without
 a whole lot of information as to why.  The only output it gave was
 `svn info failed`.  Therefore, I grepped for svn in the scons folder
