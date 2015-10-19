@@ -58,6 +58,6 @@ The real proof, however, is in the pudding.  When checking the size of the
 of the .git folder using `du -c`, I got 760 for the sparse folder whereas
 I got 892 for the non-sparse checkout.
 
-Note: If you are doing a sparse checkout of a pre-existing clone, simply do steps 4 and 5 and then run `git read-tree -mu HEAD`.  This Updates the working tree.  Thanks (Jason Karns)[http://jasonkarns.com/blog/subdirectory-checkouts-with-git-sparse-checkout/]
+Note: If you are doing a sparse checkout of a pre-existing clone, simply do steps 4 and 5 and then run `git read-tree -mu HEAD`.  This Updates the working tree.  Thanks [Jason Karns](http://jasonkarns.com/blog/subdirectory-checkouts-with-git-sparse-checkout/)
 
 ## Can git-svn do a sparse checkout?
