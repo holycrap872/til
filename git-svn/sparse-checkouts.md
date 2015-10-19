@@ -8,7 +8,8 @@ work with git, and whether they can be extended to git-svn.
 
 To answer this question I did a series of quick experiments.  
 
-## Can you do a sparse clone?
+## Can you do a sparse clone of a git repo without fetching the entire thing?
+
 First, there's the control... a blank git repo that is then initialized
 to be a clone of a sample repo.  I did this using the following commands
 
@@ -57,3 +58,4 @@ The real proof, however, is in the pudding.  When checking the size of the
 of the .git folder using `du -c`, I got 760 for the sparse folder whereas
 I got 892 for the non-sparse checkout.
 
+## Can git-svn do a sparse checkout?
