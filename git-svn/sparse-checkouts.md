@@ -1,4 +1,10 @@
-# Can you do sparse checkouts in SVN?
+# Can you do sparse checkouts in git-svn?
+
+Sparse checkouts are a way that SVN uses to get around the fact that
+the repo's it creates are so big.  Essetnially, you can choose a specific
+part of the repo that you want to download and ignore the rest.  Git
+has these same features.  This document examines how sparse checkouts
+work with git, and whether they can be extended to git-svn.
 
 To answer this question I did a series of quick experiments.  
 
