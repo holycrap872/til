@@ -21,14 +21,14 @@ this problem and it took me a while to figure out what was being
 checked and where).
 
 ```
-export GTR_BUILD_ARGS"git=true"
+export GTR_BUILD_ARGS"git=true offsite=true"
 ./build
 ```
 
 another option is simply
 
 ```
-./build git=true
+./build git=true offsite=true
 ```
 
 To explain this problem a little further, scons was failing without
@@ -38,3 +38,12 @@ and found a likely line.  From there I traced the python scons file
 to see that it was looking for a variable as to whether I used git
 or svn.  I then passed in the information via the variable and it
 proceeded to build.
+
+Similarly, the stupid thing was failing without any warnings at all
+other than saying it couldn't find some manual.  Therefore, after
+~30 minutes of digging (thanks cons) I was finally able to figure out
+why.  You have to set the offsite flag to true...not sure why.
+
+It seems a particularly bad design decision to have a build script
+that big fail silently.  I don't know who did that, but I'm not
+real happy with them right now.
