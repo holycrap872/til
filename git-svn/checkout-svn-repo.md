@@ -56,6 +56,13 @@ This will add the branches as "remote" repositories, from which
 you can work.
 
 ##One Final Note
+If you only want to "fetch" and "merge" with the specific branch
+that you are on, by far the best way to do this is to simply run
+`git svn rebase` in the particular branch you want to update.
+Doing this only pulls information from the repository reflecting
+the svn branch that you are currently working on.  (I think you
+may have to have it set up as a tracking branch, however.)
+
 Whenever you fetch from the svn repo, it is advisable that you
 run the command `git svn fetch --fetch-all`  This will get all
 changes along every branch in the SVN repository.  After this,
