@@ -5,7 +5,7 @@ I encounter I google and pretty much just paste in, hoping they work.  What
 follows is my attempt to understand what's going on a little better.
 
 For my examples, I'll be using the simple c program located
-[here](c-based-compiling/samples/simple.cpp)
+[here](c-based-compiling/sample1/simple.cpp)
 
 ## The Stages
 
@@ -16,7 +16,7 @@ compilation process.  For clang (which I'll be using) the stages are
    directives.  To generate this stage I ran `clang++ -E simple.cpp`.  This
    produces a ton of code directly to stdin.  When I redirected it into a file,
    the overall size was 451057 bytes.  It can be seen
-   [here](c-based-compiling/samples/simple.e).  As can be noticed, this pulls
+   [here](c-based-compiling/sample1/simple.e).  As can be noticed, this pulls
    in everything (including iostream and all of it's dependencies).  In
    addition, it's all in plain-text.  Future stages of compilation will
    dramatically shrink the output: this is due to linking to pre-compiled
@@ -46,7 +46,7 @@ compilation process.  For clang (which I'll be using) the stages are
    optimizations are complete, the LLVM can be output to many different
    architectures.  To generate the LLVM code, simply run
    `clang++ -S simple.cpp`. The output can be seen
-   [here](c-based-compiling/samples/simple.s).
+   [here](c-based-compiling/sample1/simple.s).
 
    An interesting side note, adding the `static` flag at this stage does
    not increase the size of the output at all.  This shows two things...
@@ -58,7 +58,7 @@ compilation process.  For clang (which I'll be using) the stages are
 4) Assembly Generation : This is the stage that translates LLVM to assembly
    code.  In this case, the translation is to an ELF object file.  The command
    to run this stage is `clang++ -c simple.cpp `The output is not super
-   interesting but can be seen [here](c-based-compiling/samples/simple.o).
+   interesting but can be seen [here](c-based-compiling/sample1/simple.o).
 
    It is again an interesting side not that adding the `static` flag does not
    increase the size of the output at all.
@@ -91,7 +91,12 @@ are processed in a depth first manner.
 
 When using the `.s` file to create the `.o` file and when using the `.o` file
 to create the executable, the header is not required.  This is illustrative of
-the way c and cpp treat their headers.
+the way c and cpp treat their headers.  Headers are used to hide the specifics
+of a class.  As has been [pointed out](), they don't do that perfectly since
+private variables are included in headers.  Therefore, everytime the private
+variables are changed (textually), not only must that c/cpp file be recompiled,
+but everything that relies on it also must be recompiled.  The reason for this
+is ...  The experiments we just did illustrate this by....
 
 ## So What's Next
 

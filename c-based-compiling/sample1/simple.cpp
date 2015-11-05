@@ -1,12 +1,12 @@
-#include "simple.hpp"
 #include <iostream>
+#include "simple.hpp"
 
 using namespace std;
 
 int main(int argc, char * argv[]){
     if (argc > VALUE) {
-        std::cout << HI;
+        cout << HI;
     } else {
-        std::cout << BYE;
+        cout << BYE;
     }
 }
