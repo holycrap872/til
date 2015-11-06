@@ -72,33 +72,14 @@ compilation process.  For clang (which I'll be using) the stages are
    Finally, as noted in the discussion in stage 3, adding the `static` flag at
    this point balloons the executable size from 9050 to 1625497 bytes.
 
-## Header files
-
-Each stage of described above relies on the one before it.  Another way to say
-it is that each stage passes the information it calculates on to the next stage.
-I haven't yet discovered how to capture the information from stage 1 and then
-manually pass it into stage 2 or how to capture the output from stage 2 and
-pass it into stage 3.  Stage 3, however, produces a `.s` file that can be
-directly passed into stage 4 via the command `clang++ -c simple.s`, producing a
-`.o` file. The same goes for `.o` files to executables.
-
-This got me wondering...at what point do headers become superfluous and what
-does that show about them?  Removing the header at stage 1 caused errors.
-Namely "simple.cpp:1:10: fatal error: 'simple.hpp' file not found".
-Interestingly, the Preprocessor created almost all of the fully expanded file
-before finding the error on line 2.  This makes it seem likely that things
-are processed in a depth first manner.
-
-When using the `.s` file to create the `.o` file and when using the `.o` file
-to create the executable, the header is not required.  This is illustrative of
-the way c and cpp treat their headers.  Headers are used to hide the specifics
-of a class.  As has been [pointed out](), they don't do that perfectly since
-private variables are included in headers.  Therefore, everytime the private
-variables are changed (textually), not only must that c/cpp file be recompiled,
-but everything that relies on it also must be recompiled.  The reason for this
-is ...  The experiments we just did illustrate this by....
-
 ## So What's Next
 
 Now that I understand the basics, I'm going to break out the different things
-I learn into sub 
+I learn into sub sections
+
+- [Header Files](c-based-compiling/headers.md)
+- [Libraries]
+
+## So you're seeing the error...
+
+- [fatal error: 'XXX.hpp' file not found](c-based-compiling/header.md)
