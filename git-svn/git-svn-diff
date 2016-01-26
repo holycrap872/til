@@ -1,0 +1,90 @@
+#! /usr/bin/python
+
+import os
+import sys
+import subprocess
+
+def git_diff(base_commit, end_commit):
+    cmd = []
+    cmd.append('git')
+    cmd.append('diff')
+    cmd.append('-U50')
+    cmd.append(base_commit)
+    cmd.append(end_commit)
+    cmd.append('--no-prefix')
+    cmd.append('--ignore-space-at-eol')
+#    cmd.append('|')
+#    cmd.append('-e')
+#    cmd.append('"s/^diff')
+#    cmd.append('--git')
+#    cmd.append('[^[:space:]]*/Index:/"')
+#    cmd.append('-e')
+#    cmd.append('"s/^index.*/===================================================================/"')
+
+    print(cmd)
+    
+    process = subprocess.Popen(cmd, stdout=subprocess.PIPE)
+
+    diff_arr = []
+    while True:
+        line = process.stdout.readline()
+        if line == '':
+            return diff_arr
+        else:
+            diff_arr.append(line)
+
+def sanitize(diff_arr):
+    i = 0
+    ret_arr = []
+    while(i < len(diff_arr)):
+        if diff_arr[i].startswith("diff --git"):
+            split = diff_arr[i].split(" ")
+            ret_arr.append("Index: " + split[3])
+            ret_arr.append("===================================================================\n")
+
+            if (diff_arr[i + 2].startswith("index ")):
+                # Have new file.  Line of the form:
+                #    index 0000000..3fe3fd8
+                #    --- /dev/null
+                #    +++ cgc_specific/scripts/script_maker.py
+                # Want to get rid of first 2 and (almost) duplicate 3rd
+
+                line = diff_arr[i + 4].split(" ")
+                ret_arr.append("--- " + line[1])
+                ret_arr.append("+++ " + line[1])
+
+                i = i + 4
+
+            else:
+                i = i + 1 # skip extra line
+        else:
+            ret_arr.append(diff_arr[i])
+
+        i = i + 1
+
+    return ret_arr
+
+def main():
+    if(len(sys.argv) != 4):
+        print(
+"""
+This script is intended to turn git-svn diffs into svn diffs
+Please pass in the following information:
+    1) The diff/commit to act as the base of the diff
+    2) The diff/commit to act as the end of the diff
+    3) The name of the file/patch to be output
+"""
+            )
+        return
+
+    diff_arr = git_diff(sys.argv[1], sys.argv[2])
+    diff_arr = sanitize(diff_arr)
+
+    f = open(sys.argv[3], "w")
+    for line in diff_arr:
+        f.write(line)
+
+    f.close()
+
+if __name__ == "__main__":
+    main()
