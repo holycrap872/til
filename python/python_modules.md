@@ -14,7 +14,7 @@ Modules work in a similar way to java's packages.  The key is to have a
 you can then use relative addressing to the file you're importing.  For example:
 
 ```
-package_name
+Package_Name
     - __init__.py
     - thing1.py
     - thing2.py
@@ -23,8 +23,8 @@ package_name
         - util.py
 ```
 
-In this case, the package_name is the name of the top-level folder.  In order
-to access the `util.py` file, all you need to do is `import package_name.lib.util`
+In this case, the Package_Name is the name of the top-level folder.  In order
+to access the `util.py` file, all you need to do is `import Package_Name.lib.util`
 
 ## Getting Fancy
 
@@ -38,6 +38,6 @@ from thing2 import parser
 from lib.util import helper_function
 ```
 
-This means that when you simply type `import package_name` from some outside
-python file, you get access to `parser`, `helper_function` and everything in
-thing1 without having to identify them by the file they are in. 
+This means that when you simply type `from Package_Name import * ` from some
+outside python file, you get access to `parser`, `helper_function` and
+everything in thing1 without having to identify them by the file they are in. 
