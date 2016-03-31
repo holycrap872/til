@@ -25,6 +25,10 @@ up in the list of matching commands.  You can also scroll down, but the keys
 collide with some terminal functionality.  See the link below to get around
 these problems.
 
+## Delete *entire* word prior to the cursor
+
+`ctrl w`
+
 ## Jump to end of bash history
 
 Assume you hit the up arrow a lot, looking for a particular command.  By hitting
