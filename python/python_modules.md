@@ -44,8 +44,10 @@ everything in thing1 without having to identify them by the file they are in.
 
 ## Pytest and Modules
 
-`sudo pip install -U pytest`
+Consult the example seen in the `pytest_example` folder.
 
-After that, use the same structure as seen in the pytest_example folder
-
+```
+sudo pip install -U pytest # if necessary
+py.test
+```
 
