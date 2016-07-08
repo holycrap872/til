@@ -41,3 +41,11 @@ from lib.util import helper_function
 This means that when you simply type `from Package_Name import * ` from some
 outside python file, you get access to `parser`, `helper_function` and
 everything in thing1 without having to identify them by the file they are in. 
+
+## Pytest and Modules
+
+`sudo pip install -U pytest`
+
+After that, use the same structure as seen in the pytest_example folder
+
+
