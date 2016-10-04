@@ -83,3 +83,4 @@ I learn into sub sections
 ## So you're seeing the error...
 
 - [fatal error: 'XXX.hpp' file not found](c-based-compiling/header.md)
+- [warning: incompatible implicit declaration of built-in function](c-based-compiling/std-libraries.md)

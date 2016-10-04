@@ -1,0 +1,79 @@
+# Lib XML 2 example
+
+This contains notes on what I had to do to get a simple program using libxml2
+to compile and run.
+
+I first had the following program
+
+```c
+include <stdio.h>
+#include <libxml/parser.h>
+#include <libxml/tree.h>
+
+unsigned char ***
+get_xml_input(const char * xml_mmap, unsigned length) {
+    xmlDocPtr doc;
+
+    doc = xmlReadMemory(xml_mmap, length, "noname.xml", NULL, 0);
+    return 0;
+}
+
+int
+main() {
+    get_xml_input("hi", 3);
+    return 0;
+} 
+```
+
+It obviously doesn't do anything all that interesting, but I was just trying
+to get the stupid thing setup.
+
+1) I tried to compile using ``gcc -o xml_sample xml_sample.c.  From this I
+got the following error:
+
+```
+xml_parser.c:2:35: fatal error: libxml/parser.h: No such file or directory
+ #include <libxml/parser.h>
+```
+
+I thought that was weird since I had just run `sudo apt-get install libxml2`.
+Therefore I ran `locate libxml`.  I got a bunch of stuff, including the
+following line:
+
+```
+/usr/include/libxml2/libxml
+```
+
+Therefore, I thought "oh, ok, the instructions for libxml2 must have gotten
+the header stuff wrong.  I therefore changed the headers from `libxml/parser.h`
+to `libxml2/libxml/parser.h`.  When I tried to compile again, though, I got
+the following error.
+
+```
+Error in libxml2/libxml/parser.h
+  Unable to file <libxml/read.h>
+```
+
+This showed me that for some reason sudo apt-get had but the libxml2 stuff under
+an unnecessary folder.  I had two options.  I could either add `/usr/include/libxml2`
+to my path, or I could move everything in the `libxml2` folder up one directory
+and remove the `libxml2` folder.  I chose to do that because changing the path
+for one library seems stupid.
+
+2) After moving the libraries around, I tried to compile again.  This time I
+got the error
+
+```
+/tmp/ccHnRsbe.o: In function `get_xml_input':
+xml_parser.c:(.text+0x2a): undefined reference to `xmlReadMemory'
+collect2: error: ld returned 1 exit status
+```
+
+I was like "great, I hate c".  Then I compiled the xml_parser.c file using the
+command "gcc -c xml_parser.c".  This created the `.o` file and showed me that
+the program had all of the headers it needed.  Now I just needed to link in
+the system libaries (libxml specifically).
+
+I therefore ran the command `gcc -o xml_parser xml_parser.o -lxml2`.  This
+combines the libxml2 library on the path with the xml_parser program I was
+writing.  With this, the whole ordeal whas over.  Overall point, I hate c.
