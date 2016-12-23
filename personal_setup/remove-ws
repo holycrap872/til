@@ -1,0 +1,8 @@
+#!/bin/sh
+
+if [ "$#" -ne 1 ]; 
+    then echo "illegal number of parameters"
+else
+    sed -i 's/[ \t]*$//' "$1"
+fi
+
