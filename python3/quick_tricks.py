@@ -70,6 +70,8 @@ def lambda2():
 def json_eval():
     x = json.loads('{"1":"a","2":"b"}')
     assert x['1'] == 'a'
+    str_x = json.dumps(x)
+    assert str_x == '{"1":"a","2":"b"}'
 
 
 def enumerate_dictioary():

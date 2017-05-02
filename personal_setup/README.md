@@ -1,16 +1,32 @@
-# Setup enviroment
+# Setup environment
 
-1) Drop in .vimrc file into `~/.vimrc`
+1) Drop in ./.vimrc file into `~/.vimrc`
 
-2) mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+2) Setup Pathogen to handle plugins
 
-3) cd ~/.vim/bundle
+  - `mkdir -p ~/.vim/autoload ~/.vim/bundle`
+  
+  - `curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim`
 
-4) git clone https://github.com/Valloric/YouCompleteMe.git 
-ls
-cd YouCompleteMe/
-git submodule update --init --recursive
+3) Get Vim Sensible
 
-sudo apt-get install clang CMake python-dev mono-xbuild
-./install.sh --clang-completer  --omnisharp-completer
-cp ~/workspace/klee/.ycm_extra_conf.py ~/.vim
+  - `cd ~/.vim/bundle`
+
+  - `git clone git://github.com/tpope/vim-sensible.git`
+
+4) Setup YouCompleteMe
+
+  - `cd ~/.vim/bundle`
+
+  - `git clone https://github.com/Valloric/YouCompleteMe.git`
+
+  - `cd YouCompleteMe/`
+
+  - `git submodule update --init --recursive`
+
+  - `sudo apt-get install clang CMake python-dev mono-xbuild`
+
+  - `./install.sh --clang-completer --omnisharp-completer`
+
+  - `cp ~/workspace/klee/.ycm_extra_conf.py ~/.vim`
+
