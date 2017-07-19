@@ -14,7 +14,11 @@
 
   - `git clone git://github.com/tpope/vim-sensible.git`
 
-4) Setup YouCompleteMe
+4) Install needed junk
+
+  - `sudo apt-get install git tmux hexedit vim curl python-pip python-dev build-essential python3-pip libtool-bin libtool automake libboost-all-dev g++ scons subversion gcc-multilib g++-multilib clang`
+
+5) Setup YouCompleteMe
 
   - `cd ~/.vim/bundle`
 
@@ -26,7 +30,5 @@
 
   - `sudo apt-get install clang CMake python-dev mono-xbuild`
 
-  - `./install.sh --clang-completer --omnisharp-completer`
-
-  - `cp ~/workspace/klee/.ycm_extra_conf.py ~/.vim`
+  - `./install.py --clang-completer --system-libclang --system-boost`
 
