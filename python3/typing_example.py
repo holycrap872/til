@@ -22,6 +22,7 @@ def greet_all(names: typing.Iterable[str]) -> None:
 def main() -> None:
     add_int(5, 6)
     add_int('c', 'l')
+    add_int('5', 5)
 
     greet_all(["Eric", "John", "Bill"])
     greet_all(["Eric", "John", 0])
