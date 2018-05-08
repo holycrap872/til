@@ -1,0 +1,26 @@
+#FROM remnux/metasploit
+#FROM phocean/msf
+FROM kalilinux/kali-linux-docker
+
+USER root
+
+RUN apt-get -y update && \
+     apt-get -y install metasploit-framework gcc vim gdb
+    
+RUN apt-get -y update && \
+    apt-get -y install bison build-essential debconf-utils dump finger flex gperf lib32ncurses5-dev libgtk2.0-dev libmpfr-dev libncurses5-dev libnss3-dev libxss-dev rcs rdate sharutils snmpd subversion tidy unzip zip pandoc vim elfutils lcov python3.5 fakechroot python-pip python3-pip python-dev metasploit-framework software-properties-common hexedit locate
+
+RUN apt-get -y install git tmux hexedit vim curl python-pip python-dev build-essential python3-pip libtool-bin libtool automake libboost-all-dev g++ scons subversion gcc-multilib g++-multilib clang && \
+    git clone https://github.com/holycrap872/til.git && \
+    cp til/personal_setup/.vimrc ~/.vimrc && \
+    mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+    curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim && \
+    cd ~/.vim/bundle && \
+    git clone https://github.com/tpope/vim-sensible.git && \
+#    cd ~/.vim/bundle && \
+#    git clone https://github.com/Valloric/YouCompleteMe.git && \
+#    cd YouCompleteMe/ && \
+#    git submodule update --init --recursive && \
+#    sudo apt-get install clang CMake python-dev mono-xbuild && \
+#    ./install.py --clang-completer --system-libclang --system-boost
+    echo "Done"
