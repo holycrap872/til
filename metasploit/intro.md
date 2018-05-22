@@ -113,6 +113,7 @@ start
 service postgresql start
 ss -ant                ## check that port 5432 is open
 msfconsole
+setg LogLevel 3
 use exploit/custom/bof_lab
 set RHOST 172.17.0.4   ## Get this value in the Docker image by running `ip a`
 set RPORT 1234
