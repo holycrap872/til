@@ -1,0 +1,3 @@
+```
+xclip -sel clip < ${FILE}
+```
