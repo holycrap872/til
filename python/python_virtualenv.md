@@ -2,6 +2,10 @@ Virtual env allows you to install "local" python libraries without
 having them affect your "global" python libraries. This allows you
 to have different versions of the same library in different projects.
 
+> Note: virtual env basically creates a "library folder" that you can
+  use to loadup an environment. You **do not** want to add source
+  files to the "library folder"
+
 - `virtualenv $PROJECT_NAME`
     - Creates a new virtual environment directory
 
