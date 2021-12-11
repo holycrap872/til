@@ -4,12 +4,14 @@ from playwright.async_api._generated import Request, Response
 
 
 
-def log_request_headers(request: Request) -> None:
+async def log_request_headers(request: Request) -> None:
     print("request", request.method, request.url)
 
 
-def log_response_headers(response: Response) -> None:
-    print("response", response.status, response.url)
+async def log_response_headers(response: Response) -> None:
+    text = await response.text()
+    body = await response.body()
+    print("response", response.status, response.url, len(text), len(body))
 
 
 async def get_title(url: str) -> None:
