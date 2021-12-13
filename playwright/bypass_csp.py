@@ -1,7 +1,15 @@
 import asyncio
 import typing
 from playwright.async_api import async_playwright
-from playwright.async_api._generated import Route
+from playwright.async_api._generated import Route, Dialog
+
+
+async def on_dialog(dialog: Dialog):
+    print(dialog)
+    print(dir(dialog))
+    msg = dialog.message
+    print(f"Got popup with message {msg}")
+    await dialog.accept()
 
 
 async def get_title(url: str) -> None:
@@ -9,6 +17,7 @@ async def get_title(url: str) -> None:
         print("hi")
         browser = await p.chromium.launch(headless=False, slow_mo=10000)
         page = await browser.new_page(bypass_csp=True)
+        page.on("dialog", on_dialog)
         await page.goto(url)
         title = await page.title()
         await browser.close()
