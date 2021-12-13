@@ -43,7 +43,12 @@ async def get_title(url: str) -> None:
         )
         page = await browser.new_page()
         await page.goto(url)
-        await asyncio.sleep(10)
+        # You should use page.wait_for_timeout(5000) instead of time.sleep(5) and
+        # it is better to not wait for a timeout at all, but sometimes it is useful
+        # for debugging. In these cases, use our wait method instead of the time
+        # module. This is because we internally rely on asynchronous operations and
+        # when using time.sleep(5) they can't get processed correctly.
+        page.wait_for_timeout(5000)
         title = await page.title()
         await browser.close()
         print(title)
