@@ -5,7 +5,7 @@ from playwright.async_api._generated import Route
 
 # mockapi_path = "/Users/erizzi/Documents/workspace/DyePackInfraDeploy/src/DyePackInfrastructure/configuration/dyepack_lambda_resources/mockapi.crx"
 # mockapi_path = "/Users/erizzi/DyePackChromeExtension/dist.crx"
-mockapi_path = "/Users/erizzi/Documents/workspace/til/DyePackChromeExtension/dist"
+mockapi_path = "/Users/erizzi/Documents/workspace/chrome_extensions/DyePackChromeExtension/dist"
 
 # To run:
 # 1. make everything in the /dist folder of the extension readable

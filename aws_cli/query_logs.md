@@ -27,3 +27,6 @@ aws logs start-query --log-group-name <log_group> --region us-west-2 --start-tim
 ```
 aws logs get-query-results --query-id <output_of_prev_command> --region us-west-2 > out.txt
 ```
+
+> Note: There's a status of the query at the beginning of the output... wait for it
+    to "Complete".

@@ -11,6 +11,14 @@ async def log_request_headers(request: Request) -> None:
 async def log_response_headers(response: Response) -> None:
     text = await response.text()
     body = await response.body()
+    response.url
+    response.request
+    response.headers
+    response.status
+    response.request
+    response.request.method
+    response.request.
+    response.
     print("response", response.status, response.url, len(text), len(body))
 
 
