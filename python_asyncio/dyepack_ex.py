@@ -4,6 +4,7 @@ from asyncio.tasks import Task
 import enum
 import time
 import typing
+from contextlib import contextmanager
 
 
 class JobType(enum.Enum):
@@ -26,27 +27,26 @@ class Job(typing.NamedTuple):
 
 
 async def do_job(job_str: str) -> None:
+    print(f"Waiting on {job_str}")
     await asyncio.sleep(1)
 
 
-async def do_scan(work_loop: AbstractEventLoop, job: Job) -> None:
-    if job.kind == JobType._PREP:
-        for i in range(0, 4):
-            new_job = Job(JobType._EXPLOIT, job.orig_state + f", prep_{i}")
-            await do_job(f"prep_{i}")
-            work_loop.create_task(do_scan(work_loop, new_job))
+async def do_prep(work_loop: AbstractEventLoop, job: Job) -> None:
+    for i in range(0, 4):
+        new_job = Job(JobType._EXPLOIT, job.orig_state + f", prep_{i}")
+        await do_job(f"prep_{i}")
+        work_loop.create_task(do_exploit(work_loop, new_job))
 
-    elif job.kind == JobType._EXPLOIT:
-        for i in range(0, 4):
-            new_job = Job(JobType._VERIFY, job.orig_state + f", exploit_{i}")
-            await do_job(f"exploit_{i}")
-            work_loop.create_task(do_scan(work_loop, new_job))
 
-    elif job.kind == JobType._VERIFY:
-        print(job.orig_state)
+async def do_exploit(work_loop: AbstractEventLoop, job: Job) -> None:
+    for i in range(0, 4):
+        new_job = Job(JobType._VERIFY, job.orig_state + f", exploit_{i}")
+        await do_job(f"exploit_{i}")
+        work_loop.create_task(do_verify(work_loop, new_job))
 
-    else:
-        raise ValueError
+
+async def do_verify(work_loop: AbstractEventLoop, job: Job) -> None:
+    await do_job(job.orig_state + ", verify")
 
 
 async def main():
@@ -57,7 +57,7 @@ async def main():
     assert len(current_tasks) == 1
     main_task = list(current_tasks)[0]
     
-    loop.create_task(do_scan(loop, Job(JobType._PREP, "start")))
+    loop.create_task(do_prep(loop, Job(JobType._PREP, "start")))
 
     while True:
         pending = [task for task in asyncio.Task.all_tasks() if task != main_task and not task.done()]
