@@ -38,9 +38,10 @@ def reduce_min() -> None:
     print(reduce(lambda acc, y: acc if acc < y else y, arr))
 
 
-map_1()
-map_2()
-reduce_1()
-reduce_as_len()
-reduce_mul()
-reduce_min()
+if __name__ == "__main__":
+    map_1()
+    map_2()
+    reduce_1()
+    reduce_as_len()
+    reduce_mul()
+    reduce_min()

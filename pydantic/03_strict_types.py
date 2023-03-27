@@ -26,10 +26,11 @@ class User(BaseModel):
     athletic_prowess: AthleticProwess
 
 
-# vvvv Doesn't do dynamic validation vvvv
-u1 = User.construct(name="Eric", age="31", athletic_prowess=AthleticProwess.POOR)
-print(u1)
+if __name__ == "__main__":
+    # vvvv Doesn't do dynamic validation vvvv
+    u1 = User.construct(name="Eric", age="31", athletic_prowess=AthleticProwess.POOR)
+    print(u1)
 
-# vvv Improper age type is both a static error and a dynamic error vvv
-u2 = User(name="Eric", age="31", athletic_prowess=AthleticProwess.ELITE)
-print(u2)
+    # vvv Improper age type is both a static error and a dynamic error vvv
+    u2 = User(name="Eric", age="31", athletic_prowess=AthleticProwess.ELITE)
+    print(u2)

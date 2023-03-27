@@ -27,14 +27,15 @@ class UserValidated(BaseModel):
     athletic_prowess: AthleticProwess
 
 
-u1 = User("Eric", 31, "ELITE")
-out_dict = json.dumps(asdict(u1))
-print(out_dict)
+if __name__ == "__main__":
+    u1 = User("Eric", 31, "ELITE")
+    out_dict = json.dumps(asdict(u1))
+    print(out_dict)
 
-in_dict = json.loads(out_dict)
-in_dict["athletic_prowess"] = "ELIT"  # data error
-u2 = User(**in_dict)
-print(u2)
+    in_dict = json.loads(out_dict)
+    in_dict["athletic_prowess"] = "ELIT"  # data error
+    u2 = User(**in_dict)
+    print(u2)
 
-u3 = UserValidated(**in_dict)
-print(u3)
+    u3 = UserValidated(**in_dict)
+    print(u3)

@@ -23,11 +23,12 @@ class User(BaseModel):
     athletic_prowess: AthleticProwess
 
 
-# Note: the `"31"` is a 
-u = User(name="Eric", age="31", athletic_prowess=AthleticProwess.ELITE)
-json_dict = u.json()
-print(json_dict)
-u2 = User.parse_raw(json_dict)
-if u2.age > 21:
-    print("hi")
-print(u2)
+if __name__ == "__main__":
+    # Note: the `"31"` is a 
+    u = User(name="Eric", age="31", athletic_prowess=AthleticProwess.ELITE)
+    json_dict = u.json()
+    print(json_dict)
+    u2 = User.parse_raw(json_dict)
+    if u2.age > 21:
+        print("hi")
+    print(u2)
