@@ -2,6 +2,9 @@
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set history=700
+set whichwrap=h,l
+syntax on
+filetype indent plugin on
 
 "How to handle tabbing
 filetype plugin indent on
@@ -25,24 +28,3 @@ set secure
 "highlight ExtraWhitespace ctermbg=red guibg=red
 "match ExtraWhitespace /\s\+$/
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin manager
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Now any plugins you wish to install can be extracted to a sub
-"directory under ~/.vim/bundle, and they will be added to the
-"'runtimepath'.
-"For example...
-" - cd ~/.vim/bundle && \
-" - git clone git://github.com/tpope/vim-sensible.git
-
-execute pathogen#infect()
-syntax on
-filetype plugin indent on
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => YouCompleteMe
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"
-let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
